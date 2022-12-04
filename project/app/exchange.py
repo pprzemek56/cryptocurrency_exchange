@@ -1,3 +1,6 @@
+from project.database.config import cursor
+
+
 def main():
     while True:
         print("1    Print accounts")
@@ -61,6 +64,8 @@ def main():
 # Main menu methods
 
 def print_accounts():
+    statement = '''select * from accounts'''
+    cursor.execute(statement)
     pass
 
 
