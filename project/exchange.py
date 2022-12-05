@@ -12,7 +12,7 @@ def main():
         try:
             choice = int(choice)
         except ValueError:
-            print("Use digital only!")
+            print("Use digit only!")
             pass
 
         match choice:
@@ -34,7 +34,7 @@ def main():
                         try:
                             choice = int(choice)
                         except ValueError:
-                            print("Use digital only!")
+                            print("Use digit only!")
                             pass
 
                         match choice:
@@ -74,7 +74,6 @@ def print_accounts():
             print(f"    DESCRIPTION: {account[1]}")
 
 
-
 def register():
     with conn.cursor() as cursor:
         try:
@@ -91,6 +90,23 @@ def register():
 
 
 def log_in():
+    try:
+        account_id = int(input("Chose id account: "))
+    except ValueError:
+        print("Use digit only!")
+        return False
+    with conn.cursor() as cursor:
+        # fetch account
+        statement = '''select * from accounts where id = %s'''
+        cursor.execute(statement, account_id)
+        account = cursor.fetchone()
+
+        # fetch transaction of account
+        statement = '''select * from transaction where account_id = %s'''
+        cursor.execute(statement, account_id)
+        transaction = cursor.fetchall()
+
+        # TODO: crate object of Transaction from fetched transaction and the same with Account
     return True
 
 
