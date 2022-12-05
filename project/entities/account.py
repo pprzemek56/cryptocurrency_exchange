@@ -1,9 +1,9 @@
 class Account:
-    def __init__(self, account_id, transaction_id, description="None", balance=0.0):
+    def __init__(self, account_id, description="None", balance=0.0):
         self.account_id = account_id
-        self.transaction_id = transaction_id
         self.description = description
         self.balance = balance
+        self.transactions = []
 
     @property
     def account_id(self):
@@ -30,9 +30,9 @@ class Account:
         self._balance = balance
 
     @property
-    def transaction_id(self):
-        return self._transaction_id
+    def transactions(self):
+        return self._transactions
 
-    @transaction_id.setter
-    def transaction_id(self, transaction_id):
-        self._transaction_id = transaction_id
+    @transactions.setter
+    def transactions(self, transactions):
+        self._transactions = transactions
