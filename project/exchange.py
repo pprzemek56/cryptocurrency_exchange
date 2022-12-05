@@ -1,4 +1,4 @@
-from project.database.config import cursor
+from database.config import conn
 
 
 def main():
@@ -64,13 +64,30 @@ def main():
 # Main menu methods
 
 def print_accounts():
-    statement = '''select * from accounts'''
-    cursor.execute(statement)
-    pass
+    statement = '''select id, description from accounts'''
+    with conn.cursor() as cursor:
+        cursor.execute(statement)
+        accounts = cursor.fetchall()
+        for i, account in enumerate(accounts):
+            print(f"{i + 1}.")
+            print(f"    ID: {account[0]}")
+            print(f"    DESCRIPTION: {account[1]}")
+
 
 
 def register():
-    pass
+    with conn.cursor() as cursor:
+        try:
+            description = input("Pass account description: ")
+            balance = float(input("Pass starting balance: "))
+        except ValueError:
+            print("Error while creating account")
+            return
+        statement = '''insert into accounts (description, balance)
+         VALUES (%s, %s)'''
+        cursor.execute(statement, (description, balance))
+
+        conn.commit()
 
 
 def log_in():
