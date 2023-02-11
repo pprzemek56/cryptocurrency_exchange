@@ -1,9 +1,9 @@
 class Transaction:
-    def __init__(self, token, price, amount, value, fee, extra_fee):
+    def __init__(self, token, amount, value, fee, extra_fee):
         self.token = token
-        self.price = price
         self.amount = amount
         self.cost = value + fee + extra_fee
+        self.return_price
 
     @property
     def token(self):
@@ -13,13 +13,6 @@ class Transaction:
     def token(self, token):
         self._token = token
 
-    @property
-    def price(self):
-        return self._price
-
-    @price.setter
-    def price(self, price):
-        self._price = price
 
     @property
     def amount(self):
@@ -36,3 +29,15 @@ class Transaction:
     @cost.setter
     def cost(self, cost):
         self._cost = cost
+
+    @property
+    def return_price(self):
+        return self._return_price
+
+    @return_price.setter
+    def return_price(self, return_price):
+        self._return_price = return_price
+
+    def count_return_price(self):
+        #self._return_price =
+        ...
