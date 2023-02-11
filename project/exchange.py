@@ -1,4 +1,4 @@
-from database.config import conn
+from exchange.database.config import conn
 
 
 def main():
